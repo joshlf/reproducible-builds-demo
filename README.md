@@ -1,0 +1,5 @@
+# Reproducible Builds Demo
+
+This is a compiler which is meant to illustrate the concept that even reproducible builds are vulnerable to sufficiently mallicious compilers without extra care. It accepts a very simple language (whose only valid program contains the single word "foo") which either outputs a bash script which prints "Flowers!" or "PWNED!!!" depending on whether it is able to cause the latter program to have the same SHA-1 hash as the former program. It does this by looking for a directory on the user's path which the user has write permissions on and writing a fake sha1sum program (which will supercede any sha1sum programs later in the user's path). This fake program will, upon receiving the malicious executable as input, output the SHA-1 hash of the non-malicious executable.
+
+The idea is to demonstrate that even if a developer distributes source code and a hash of the expected compiled output from a deterministic compiler, a malicious compiler can still fool the system if the risk is not properly mitigated.
